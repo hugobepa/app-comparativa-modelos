@@ -1,0 +1,21 @@
+{
+  "id": "llama-4-maverick",
+  "nombre": "Llama 4 Maverick",
+  "proveedor": "meta",
+  "categoria": "economic",
+  "precio": {
+    "input": 0.08,
+    "output": 0.25,
+    "moneda": "USD"
+  },
+  "contexto": 128000,
+  "benchmarks": {
+    "sweBenchVerified": 35.2,
+    "humaneval": 79.8,
+    "mmlu": 70.4,
+    "gpqa": 55.3
+  },
+  "caracteristicas": ["vision", "streaming", "system-prompt"],
+  "disponibleEn": ["openrouter", "zen-ai"],
+  "lanzamiento": "2025-04-05"
+}

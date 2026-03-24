@@ -1,0 +1,21 @@
+{
+  "id": "o3",
+  "nombre": "o3",
+  "proveedor": "openai",
+  "categoria": "specialized",
+  "precio": {
+    "input": 10,
+    "output": 40,
+    "moneda": "USD"
+  },
+  "contexto": 200000,
+  "benchmarks": {
+    "sweBenchVerified": 69.1,
+    "humaneval": 93.1,
+    "mmlu": 87.5,
+    "gpqa": 76.8
+  },
+  "caracteristicas": ["reasoning", "streaming", "system-prompt"],
+  "disponibleEn": ["github-copilot", "openrouter"],
+  "lanzamiento": "2025-04-16"
+}

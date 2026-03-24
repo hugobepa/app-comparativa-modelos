@@ -1,0 +1,26 @@
+{
+  "id": "grok-2",
+  "nombre": "Grok 2",
+  "proveedor": "xai",
+  "categoria": "standard",
+  "precio": {
+    "input": 2,
+    "output": 10,
+    "moneda": "USD"
+  },
+  "contexto": 131072,
+  "benchmarks": {
+    "sweBenchVerified": 45.8,
+    "humaneval": 84.2,
+    "mmlu": 81.2,
+    "gpqa": 66.7
+  },
+  "caracteristicas": [
+    "vision",
+    "function-calling",
+    "streaming",
+    "system-prompt"
+  ],
+  "disponibleEn": ["openrouter"],
+  "lanzamiento": "2024-12-01"
+}

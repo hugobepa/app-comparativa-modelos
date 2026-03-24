@@ -1,0 +1,21 @@
+{
+  "id": "qwen-2.5-coder-32b",
+  "nombre": "Qwen 2.5 Coder 32B",
+  "proveedor": "meta",
+  "categoria": "economic",
+  "precio": {
+    "input": 0.07,
+    "output": 0.07,
+    "moneda": "USD"
+  },
+  "contexto": 32768,
+  "benchmarks": {
+    "sweBenchVerified": 38.7,
+    "humaneval": 82.4,
+    "mmlu": 72.1,
+    "gpqa": 58.6
+  },
+  "caracteristicas": ["streaming", "system-prompt"],
+  "disponibleEn": ["openrouter", "zen-ai"],
+  "lanzamiento": "2024-11-12"
+}
