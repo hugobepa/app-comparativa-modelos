@@ -1,0 +1,96 @@
+---
+export interface Props {
+  id: string;
+  nombre: string;
+  proveedor: string;
+  categoria: 'flagship' | 'standard' | 'economic' | 'specialized';
+  contexto: number;
+  precio: {
+    input: number;
+    output: number;
+    moneda?: string;
+  };
+  caracteristicas?: string[];
+  disponibleEn?: string[];
+}
+
+const categoriaLabels: Record<string, string> = {
+  flagship: 'Flagship',
+  standard: 'Estándar',
+  economic: 'Económico',
+  specialized: 'Especializado'
+};
+
+const categoriaColors: Record<string, string> = {
+  flagship: 'bg-purple-100 text-purple-800',
+  standard: 'bg-blue-100 text-blue-800',
+  economic: 'bg-green-100 text-green-800',
+  specialized: 'bg-orange-100 text-orange-800'
+};
+
+const { 
+  id, 
+  nombre, 
+  proveedor, 
+  categoria, 
+  contexto, 
+  precio,
+  caracteristicas = [],
+  disponibleEn = []
+} = Astro.props;
+
+function formatPrice(price: number): string {
+  if (price === 0) return 'Gratis';
+  if (price < 0.01) return `$${price.toFixed(6)}`;
+  if (price < 1) return `$${price.toFixed(4)}`;
+  return `$${price.toFixed(2)}`;
+}
+
+function formatContext(tokens: number): string {
+  if (tokens >= 1000000) return `${(tokens / 1000000).toFixed(1)}M`;
+  if (tokens >= 1000) return `${(tokens / 1000).toFixed(0)}K`;
+  return tokens.toString();
+}
+---
+
+<a href={`/modelos/${id}`} class="block bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6 border border-gray-100">
+  <div class="flex items-start justify-between mb-4">
+    <div>
+      <h3 class="text-lg font-semibold text-gray-900">{nombre}</h3>
+      <p class="text-sm text-gray-500 capitalize">{proveedor}</p>
+    </div>
+    <span class={`px-2 py-1 rounded-full text-xs font-medium ${categoriaColors[categoria] || 'bg-gray-100 text-gray-800'}`}>
+      {categoriaLabels[categoria] || categoria}
+    </span>
+  </div>
+  
+  <div class="space-y-3 mb-4">
+    <div class="flex justify-between text-sm">
+      <span class="text-gray-600">Input:</span>
+      <span class="font-medium text-gray-900">{formatPrice(precio.input)} / 1K tokens</span>
+    </div>
+    <div class="flex justify-between text-sm">
+      <span class="text-gray-600">Output:</span>
+      <span class="font-medium text-gray-900">{formatPrice(precio.output)} / 1K tokens</span>
+    </div>
+    <div class="flex justify-between text-sm">
+      <span class="text-gray-600">Contexto:</span>
+      <span class="font-medium text-gray-900">{formatContext(contexto)} tokens</span>
+    </div>
+  </div>
+  
+  {caracteristicas.length > 0 && (
+    <div class="flex flex-wrap gap-1">
+      {caracteristicas.slice(0, 3).map((caracteristica) => (
+        <span class="px-2 py-0.5 bg-gray-100 text-gray-600 rounded text-xs">
+          {caracteristica}
+          </span>
+        ))}
+        {caracteristicas.length > 3 && (
+          <span class="px-2 py-0.5 bg-gray-100 text-gray-600 rounded text-xs">
+          +{caracteristicas.length - 3}
+        </span>
+      )}
+    </div>
+  )}
+</a>
