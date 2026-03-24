@@ -1,0 +1,26 @@
+{
+  "id": "gemini-2.5-flash",
+  "nombre": "Gemini 2.5 Flash",
+  "proveedor": "google",
+  "categoria": "economic",
+  "precio": {
+    "input": 0.075,
+    "output": 0.3,
+    "moneda": "USD"
+  },
+  "contexto": 1048576,
+  "benchmarks": {
+    "sweBenchVerified": 42.1,
+    "humaneval": 83.2,
+    "mmlu": 76.5,
+    "gpqa": 62.3
+  },
+  "caracteristicas": [
+    "vision",
+    "function-calling",
+    "streaming",
+    "system-prompt"
+  ],
+  "disponibleEn": ["openrouter", "zen-ai"],
+  "lanzamiento": "2025-02-20"
+}
