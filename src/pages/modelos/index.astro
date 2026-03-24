@@ -1,0 +1,201 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../components/BaseLayout.astro';
+import ModelCard from '../../components/ModelCard.astro';
+
+const modelos = await getCollection('modelos');
+
+// Get unique providers for filter
+const proveedores = [...new Set(modelos.map(m => m.data.proveedor))].sort();
+
+// Get unique categories for filter
+const categorias = [...new Set(modelos.map(m => m.data.categoria))].sort();
+
+const categoriaLabels: Record<string, string> = {
+  'flagship': 'Flagship (Premium)',
+  'standard': 'Estándar',
+  'economic': 'Económico',
+  'specialized': 'Especializado'
+};
+
+const proveedorLabels: Record<string, string> = {
+  'anthropic': 'Anthropic',
+  'openai': 'OpenAI',
+  'google': 'Google',
+  'deepseek': 'DeepSeek',
+  'meta': 'Meta',
+  'mistral': 'Mistral',
+  'xai': 'xAI'
+};
+
+// Prepare model data for client-side filtering
+const modelosData = modelos.map(m => ({
+  id: m.data.id,
+  nombre: m.data.nombre,
+  proveedor: m.data.proveedor,
+  categoria: m.data.categoria,
+  contexto: m.data.contexto,
+  precio: m.data.precio,
+  caracteristicas: m.data.caracteristicas || []
+}));
+---
+
+<BaseLayout title="Modelos de Lenguaje" currentPath={Astro.url.pathname}>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Modelos de Lenguaje</h1>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+        Explora y compara {modelos.length} modelos de lenguaje de diferentes proveedores.
+      </p>
+    </div>
+
+    <!-- Filters Section -->
+    <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <!-- Search -->
+        <div class="md:col-span-2">
+          <label for="search" class="block text-sm font-medium text-gray-700 mb-1">Buscar modelo</label>
+          <input 
+            type="text" 
+            id="search" 
+            placeholder="Ej: Claude, GPT-4, Gemini..."
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
+
+        <!-- Provider Filter -->
+        <div>
+          <label for="proveedor" class="block text-sm font-medium text-gray-700 mb-1">Proveedor</label>
+          <select 
+            id="proveedor" 
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          >
+            <option value="">Todos</option>
+            {proveedores.map(p => (
+              <option value={p}>{proveedorLabels[p] || p}</option>
+            ))}
+          </select>
+        </div>
+
+        <!-- Category Filter -->
+        <div>
+          <label for="categoria" class="block text-sm font-medium text-gray-700 mb-1">Categoría</label>
+          <select 
+            id="categoria" 
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          >
+            <option value="">Todas</option>
+            {categorias.map(c => (
+              <option value={c}>{categoriaLabels[c] || c}</option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      <!-- Results count -->
+      <div class="mt-4 flex items-center justify-between">
+        <p id="results-count" class="text-sm text-gray-600">
+          Mostrando <span class="font-semibold">{modelos.length}</span> modelos
+        </p>
+        <button 
+          id="clear-filters"
+          class="text-sm text-blue-600 hover:text-blue-800 font-medium hidden"
+        >
+          Limpiar filtros
+        </button>
+      </div>
+    </div>
+
+    <!-- Models Grid -->
+    <div id="modelos-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {modelos.map((modelo) => (
+        <div 
+          data-modelo={JSON.stringify({
+            id: modelo.data.id,
+            nombre: modelo.data.nombre,
+            proveedor: modelo.data.proveedor,
+            categoria: modelo.data.categoria
+          })}
+          class="modelo-card"
+        >
+          <ModelCard
+            id={modelo.data.id}
+            nombre={modelo.data.nombre}
+            proveedor={modelo.data.proveedor}
+            categoria={modelo.data.categoria}
+            contexto={modelo.data.contexto}
+            precio={modelo.data.precio}
+            caracteristicas={modelo.data.caracteristicas}
+          />
+        </div>
+      ))}
+    </div>
+
+    <!-- No results message -->
+    <div id="no-results" class="hidden text-center py-12">
+      <svg class="w-16 h-16 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+      </svg>
+      <h3 class="text-xl font-semibold text-gray-900 mb-2">No se encontraron modelos</h3>
+      <p class="text-gray-600">Intenta con otros términos de búsqueda o filtros.</p>
+    </div>
+  </div>
+</BaseLayout>
+
+<script define:vars={{ modelosData }}>
+  const searchInput = document.getElementById('search');
+  const proveedorSelect = document.getElementById('proveedor');
+  const categoriaSelect = document.getElementById('categoria');
+  const modelosGrid = document.getElementById('modelos-grid');
+  const resultsCount = document.getElementById('results-count');
+  const noResults = document.getElementById('no-results');
+  const clearFilters = document.getElementById('clear-filters');
+
+  function filterModels() {
+    const searchTerm = searchInput.value.toLowerCase().trim();
+    const proveedor = proveedorSelect.value;
+    const categoria = categoriaSelect.value;
+
+    const cards = modelosGrid.querySelectorAll('.modelo-card');
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+      const data = JSON.parse(card.dataset.modelo);
+      
+      const matchesSearch = !searchTerm || 
+        data.nombre.toLowerCase().includes(searchTerm) ||
+        data.proveedor.toLowerCase().includes(searchTerm);
+      
+      const matchesProveedor = !proveedor || data.proveedor === proveedor;
+      const matchesCategoria = !categoria || data.categoria === categoria;
+
+      const isVisible = matchesSearch && matchesProveedor && matchesCategoria;
+      
+      card.style.display = isVisible ? 'block' : 'none';
+      if (isVisible) visibleCount++;
+    });
+
+    // Update results count
+    resultsCount.innerHTML = `Mostrando <span class="font-semibold">${visibleCount}</span> modelo${visibleCount !== 1 ? 's' : ''}`;
+
+    // Show/hide no results message
+    noResults.classList.toggle('hidden', visibleCount > 0);
+    modelosGrid.classList.toggle('hidden', visibleCount === 0);
+
+    // Show/hide clear filters button
+    const hasFilters = searchTerm || proveedor || categoria;
+    clearFilters.classList.toggle('hidden', !hasFilters);
+  }
+
+  // Event listeners
+  searchInput.addEventListener('input', filterModels);
+  proveedorSelect.addEventListener('change', filterModels);
+  categoriaSelect.addEventListener('change', filterModels);
+
+  clearFilters.addEventListener('click', () => {
+    searchInput.value = '';
+    proveedorSelect.value = '';
+    categoriaSelect.value = '';
+    filterModels();
+  });
+</script>
