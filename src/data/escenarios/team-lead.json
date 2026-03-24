@@ -1,0 +1,38 @@
+{
+  "id": "team-lead",
+  "nombre": "Team Lead",
+  "descripcion": "Líder técnico que gestiona un equipo de desarrolladores y necesita herramientas de colaboración.",
+  "tipo": "team",
+  "volumenMensual": {
+    "mensajes": 8000,
+    "tokens": 15000000,
+    "peticiones": 15000
+  },
+  "prioridades": [
+    "colaboracion",
+    "gestion",
+    "calidad",
+    "reportes"
+  ],
+  "presupuesto": {
+    "min": 100,
+    "max": 500,
+    "moneda": "USD"
+  },
+  "requisitos": [
+    "Dashboard de equipo",
+    "Plantillas compartidas",
+    "Métricas de uso",
+    "Control de acceso"
+  ],
+  "casosUso": [
+    "Code review de equipo",
+    "Onboarding",
+    "Estándares de código",
+    "Mentoría"
+  ],
+  "plataformasRecomendadas": [
+    "github-copilot",
+    "zen-ai"
+  ]
+}

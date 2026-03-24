@@ -1,0 +1,37 @@
+{
+  "id": "startup-founder",
+  "nombre": "Startup Founder",
+  "descripcion": "Fundador de startup que necesita máxima productividad con presupuesto limitado pero en crecimiento.",
+  "tipo": "startup",
+  "volumenMensual": {
+    "mensajes": 2000,
+    "tokens": 5000000,
+    "peticiones": 5000
+  },
+  "prioridades": [
+    "costo-eficiencia",
+    "velocidad",
+    "escalabilidad"
+  ],
+  "presupuesto": {
+    "min": 20,
+    "max": 100,
+    "moneda": "USD"
+  },
+  "requisitos": [
+    "API robusta",
+    "Múltiples modelos",
+    "Precios competitivos",
+    "Integración fácil"
+  ],
+  "casosUso": [
+    "Prototipado rápido",
+    "MVP development",
+    "Automatización de tareas",
+    "Generación de contenido"
+  ],
+  "plataformasRecomendadas": [
+    "openrouter",
+    "zen-ai"
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "id": "enterprise-team",
+  "nombre": "Enterprise Team",
+  "descripcion": "Equipo grande de desarrollo en empresa tecnológica con alto volumen de consultas y necesidades de colaboración.",
+  "tipo": "enterprise",
+  "volumenMensual": {
+    "mensajes": 50000,
+    "tokens": 50000000,
+    "peticiones": 100000
+  },
+  "prioridades": [
+    "seguridad",
+    "escalabilidad",
+    "colaboracion",
+    "soporte"
+  ],
+  "presupuesto": {
+    "min": 500,
+    "max": 5000,
+    "moneda": "USD"
+  },
+  "requisitos": [
+    "SSO/SAML",
+    "Audit logs",
+    "SLA garantizado",
+    "Soporte dedicado",
+    "Fine-tuning disponible"
+  ],
+  "casosUso": [
+    "Code review automatizado",
+    "Documentación técnica",
+    "Refactoring a escala",
+    "Onboarding de desarrolladores"
+  ],
+  "plataformasRecomendadas": [
+    "github-copilot",
+    "openrouter"
+  ]
+}

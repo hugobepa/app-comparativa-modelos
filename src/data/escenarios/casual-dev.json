@@ -1,0 +1,36 @@
+{
+  "id": "casual-dev",
+  "nombre": "Casual Developer",
+  "descripcion": "Desarrollador que usa IA ocasionalmente para proyectos personales y aprendizaje.",
+  "tipo": "individual",
+  "volumenMensual": {
+    "mensajes": 200,
+    "tokens": 500000,
+    "peticiones": 300
+  },
+  "prioridades": [
+    "precio",
+    "facilidad",
+    "flexibilidad"
+  ],
+  "presupuesto": {
+    "min": 0,
+    "max": 20,
+    "moneda": "USD"
+  },
+  "requisitos": [
+    "Interfaz amigable",
+    "Sin compromiso mensual",
+    "Múltiples modelos"
+  ],
+  "casosUso": [
+    "Aprendizaje de nuevas tecnologías",
+    "Proyectos personales",
+    "Debugging ocasional",
+    "Generación de snippets"
+  ],
+  "plataformasRecomendadas": [
+    "zen-ai",
+    "openrouter"
+  ]
+}
