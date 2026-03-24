@@ -1,0 +1,54 @@
+{
+  "id": "openrouter",
+  "nombre": "OpenRouter",
+  "tipo": "aggregator",
+  "descripcion": "Agregador de modelos que ofrece acceso unificado a más de 200 LLMs con precios competitivos y routing inteligente.",
+  "planes": [
+    {
+      "id": "openrouter-payg",
+      "nombre": "Pay-as-you-go",
+      "precioMensual": 0,
+      "tipo": "free",
+      "caracteristicas": [
+        "Acceso a 200+ modelos",
+        "Pago por uso",
+        "Sin compromiso mensual",
+        "API unificada",
+        "Routing personalizable"
+      ],
+      "limites": {
+        "modelosDisponibles": 200
+      }
+    },
+    {
+      "id": "openrouter-credits",
+      "nombre": "Credits Pack",
+      "precioMensual": 5,
+      "tipo": "pro",
+      "caracteristicas": [
+        "Créditos prepagados",
+        "Descuento por volumen",
+        "Mayor rate limit",
+        "Soporte prioritario"
+      ],
+      "limites": {
+        "modelosDisponibles": 200
+      }
+    }
+  ],
+  "modelos": [
+    "claude-4-opus",
+    "claude-4-sonnet",
+    "gpt-4.1",
+    "gpt-4.1-mini",
+    "o3",
+    "o3-mini",
+    "gemini-2.5-pro",
+    "gemini-2.5-flash",
+    "deepseek-v3",
+    "qwen-2.5-coder-32b",
+    "llama-4-maverick",
+    "grok-2"
+  ],
+  "url": "https://openrouter.ai"
+}
