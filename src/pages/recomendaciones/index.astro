@@ -1,0 +1,53 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../components/BaseLayout.astro';
+import RecommendationCard from '../../components/RecommendationCard.astro';
+
+const recomendaciones = await getCollection('recomendaciones');
+
+// Group by perfil
+const recomendacionesPorPerfil = recomendaciones.reduce((acc, rec) => {
+  const perfil = rec.data.perfil;
+  if (!acc[perfil]) acc[perfil] = [];
+  acc[perfil].push(rec);
+  return acc;
+}, {} as Record<string, typeof recomendaciones>);
+
+const perfilLabels: Record<string, string> = {
+  'desarrollador-individual': 'Para Desarrolladores Individuales',
+  'startup': 'Para Startups',
+  'empresa': 'Para Empresas',
+  'estudiante': 'Para Estudiantes',
+  'investigador': 'Para Investigadores'
+};
+---
+
+<BaseLayout title="Recomendaciones" currentPath={Astro.url.pathname}>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Recomendaciones</h1>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+        Guías personalizadas para ayudarte a elegir el mejor modelo según tu perfil y necesidades.
+      </p>
+    </div>
+    
+    {Object.entries(recomendacionesPorPerfil).map(([perfil, recs]) => (
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">{perfilLabels[perfil] || perfil}</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {recs.map((rec) => (
+            <RecommendationCard
+              id={rec.data.id}
+              titulo={rec.data.titulo}
+              perfil={rec.data.perfil}
+              descripcion={rec.data.descripcion}
+              recomendado={rec.data.recomendado}
+              alternativas={rec.data.alternativas}
+              escenarios={rec.data.escenarios}
+            />
+          ))}
+        </div>
+      </section>
+    ))}
+  </div>
+</BaseLayout>

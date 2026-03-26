@@ -1,0 +1,12 @@
+{
+  "id": "rec-5",
+  "perfil": "enterprise",
+  "titulo": "Mejor para equipos enterprise",
+  "descripcion": "Balance de rendimiento, seguridad y escalabilidad",
+  "recomendado": "claude-4-sonnet",
+  "razon": "Balance de rendimiento, seguridad y escalabilidad",
+  "alternativas": ["gpt-4.1", "gemini-2.5-pro"],
+  "ahorroEstimado": 30,
+  "prioridad": 1,
+  "escenarios": ["enterprise-team"]
+}

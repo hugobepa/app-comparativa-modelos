@@ -1,0 +1,37 @@
+{
+  "id": "reasoning",
+  "nombre": "Reasoning Benchmark",
+  "descripcion": "Capacidad de razonamiento lógico y matemático",
+  "fuente": "GPQA Diamond",
+  "url": "https://gpqa.github.io",
+  "resultados": [
+    { "modeloId": "o3", "puntuacion": 96.4, "fecha": "2025-01-15" },
+    { "modeloId": "claude-4-opus", "puntuacion": 94.2, "fecha": "2025-01-15" },
+    { "modeloId": "o3-mini", "puntuacion": 91.8, "fecha": "2025-01-15" },
+    { "modeloId": "gemini-2.5-pro", "puntuacion": 89.5, "fecha": "2025-01-15" },
+    {
+      "modeloId": "claude-4-sonnet",
+      "puntuacion": 88.1,
+      "fecha": "2025-01-15"
+    },
+    { "modeloId": "gpt-4.1", "puntuacion": 86.7, "fecha": "2025-01-15" },
+    { "modeloId": "deepseek-v3", "puntuacion": 84.3, "fecha": "2025-01-15" },
+    {
+      "modeloId": "gemini-2.5-flash",
+      "puntuacion": 82.0,
+      "fecha": "2025-01-15"
+    },
+    { "modeloId": "gpt-4.1-mini", "puntuacion": 80.5, "fecha": "2025-01-15" },
+    {
+      "modeloId": "qwen-2.5-coder-32b",
+      "puntuacion": 77.2,
+      "fecha": "2025-01-15"
+    },
+    { "modeloId": "grok-2", "puntuacion": 74.8, "fecha": "2025-01-15" },
+    {
+      "modeloId": "llama-4-maverick",
+      "puntuacion": 72.0,
+      "fecha": "2025-01-15"
+    }
+  ]
+}

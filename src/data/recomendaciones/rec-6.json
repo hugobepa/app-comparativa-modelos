@@ -1,0 +1,12 @@
+{
+  "id": "rec-6",
+  "perfil": "profesional",
+  "titulo": "Mejor para razonamiento profundo",
+  "descripcion": "Modelos de razonamiento para problemas complejos",
+  "recomendado": "o3",
+  "razon": "Modelos de razonamiento para problemas complejos",
+  "alternativas": ["claude-4-opus", "o3-mini"],
+  "ahorroEstimado": 15,
+  "prioridad": 2,
+  "escenarios": ["team-lead", "enterprise-team"]
+}

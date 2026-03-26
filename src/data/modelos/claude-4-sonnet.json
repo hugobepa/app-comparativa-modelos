@@ -1,0 +1,26 @@
+{
+  "id": "claude-4-sonnet",
+  "nombre": "Claude 4 Sonnet",
+  "proveedor": "anthropic",
+  "categoria": "standard",
+  "precio": {
+    "input": 3,
+    "output": 15,
+    "moneda": "USD"
+  },
+  "contexto": 200000,
+  "benchmarks": {
+    "sweBenchVerified": 72.7,
+    "humaneval": 90.2,
+    "mmlu": 85.4,
+    "gpqa": 74.9
+  },
+  "caracteristicas": [
+    "vision",
+    "function-calling",
+    "streaming",
+    "system-prompt"
+  ],
+  "disponibleEn": ["github-copilot", "openrouter", "zen-ai"],
+  "lanzamiento": "2025-05-22"
+}

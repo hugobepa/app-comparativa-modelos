@@ -1,0 +1,13 @@
+{
+  "id": "enterprise-team",
+  "nombre": "Equipo Enterprise",
+  "descripcion": "Equipo grande con necesidades de seguridad y control",
+  "perfil": "enterprise",
+  "usoMensual": {
+    "peticiones": 10000,
+    "tokensInput": 5000000,
+    "tokensOutput": 2000000
+  },
+  "prioridades": ["rendimiento", "contexto"],
+  "presupuesto": 500
+}

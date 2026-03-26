@@ -1,0 +1,26 @@
+{
+  "id": "gemini-2.5-pro",
+  "nombre": "Gemini 2.5 Pro",
+  "proveedor": "google",
+  "categoria": "flagship",
+  "precio": {
+    "input": 1.25,
+    "output": 10,
+    "moneda": "USD"
+  },
+  "contexto": 1048576,
+  "benchmarks": {
+    "sweBenchVerified": 63.8,
+    "humaneval": 89.7,
+    "mmlu": 85.8,
+    "gpqa": 71.5
+  },
+  "caracteristicas": [
+    "vision",
+    "function-calling",
+    "streaming",
+    "system-prompt"
+  ],
+  "disponibleEn": ["openrouter", "zen-ai"],
+  "lanzamiento": "2025-03-12"
+}

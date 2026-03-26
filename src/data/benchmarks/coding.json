@@ -1,0 +1,37 @@
+{
+  "id": "coding",
+  "nombre": "Coding Benchmark",
+  "descripcion": "Rendimiento en tareas de programación",
+  "fuente": "SWE-bench verified",
+  "url": "https://www.swebench.com",
+  "resultados": [
+    { "modeloId": "claude-4-opus", "puntuacion": 92.5, "fecha": "2025-01-15" },
+    {
+      "modeloId": "claude-4-sonnet",
+      "puntuacion": 90.2,
+      "fecha": "2025-01-15"
+    },
+    { "modeloId": "gpt-4.1", "puntuacion": 88.7, "fecha": "2025-01-15" },
+    { "modeloId": "o3", "puntuacion": 87.3, "fecha": "2025-01-15" },
+    { "modeloId": "gemini-2.5-pro", "puntuacion": 86.1, "fecha": "2025-01-15" },
+    { "modeloId": "deepseek-v3", "puntuacion": 85.4, "fecha": "2025-01-15" },
+    { "modeloId": "gpt-4.1-mini", "puntuacion": 82.0, "fecha": "2025-01-15" },
+    { "modeloId": "o3-mini", "puntuacion": 81.5, "fecha": "2025-01-15" },
+    {
+      "modeloId": "gemini-2.5-flash",
+      "puntuacion": 79.8,
+      "fecha": "2025-01-15"
+    },
+    {
+      "modeloId": "qwen-2.5-coder-32b",
+      "puntuacion": 78.2,
+      "fecha": "2025-01-15"
+    },
+    {
+      "modeloId": "llama-4-maverick",
+      "puntuacion": 75.0,
+      "fecha": "2025-01-15"
+    },
+    { "modeloId": "grok-2", "puntuacion": 73.5, "fecha": "2025-01-15" }
+  ]
+}

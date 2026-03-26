@@ -1,0 +1,21 @@
+{
+  "id": "o3-mini",
+  "nombre": "o3 Mini",
+  "proveedor": "openai",
+  "categoria": "economic",
+  "precio": {
+    "input": 1.1,
+    "output": 4.4,
+    "moneda": "USD"
+  },
+  "contexto": 200000,
+  "benchmarks": {
+    "sweBenchVerified": 49.3,
+    "humaneval": 88.5,
+    "mmlu": 82.1,
+    "gpqa": 68.4
+  },
+  "caracteristicas": ["reasoning", "streaming", "system-prompt"],
+  "disponibleEn": ["github-copilot", "openrouter", "zen-ai"],
+  "lanzamiento": "2025-01-31"
+}

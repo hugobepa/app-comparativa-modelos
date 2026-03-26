@@ -1,0 +1,26 @@
+{
+  "id": "gpt-4.1-mini",
+  "nombre": "GPT-4.1 Mini",
+  "proveedor": "openai",
+  "categoria": "economic",
+  "precio": {
+    "input": 0.4,
+    "output": 1.6,
+    "moneda": "USD"
+  },
+  "contexto": 1047576,
+  "benchmarks": {
+    "sweBenchVerified": 38.5,
+    "humaneval": 85.3,
+    "mmlu": 78.9,
+    "gpqa": 65.2
+  },
+  "caracteristicas": [
+    "vision",
+    "function-calling",
+    "streaming",
+    "system-prompt"
+  ],
+  "disponibleEn": ["github-copilot", "openrouter", "zen-ai"],
+  "lanzamiento": "2025-04-14"
+}

@@ -1,0 +1,13 @@
+{
+  "id": "casual-dev",
+  "nombre": "Desarrollador Casual",
+  "descripcion": "Uso esporádico de IA para proyectos personales y aprendizaje",
+  "perfil": "casual",
+  "usoMensual": {
+    "peticiones": 100,
+    "tokensInput": 50000,
+    "tokensOutput": 25000
+  },
+  "prioridades": ["precio", "velocidad"],
+  "presupuesto": 0
+}

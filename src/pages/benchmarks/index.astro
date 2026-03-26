@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../components/BaseLayout.astro';
+import BenchmarkCard from '../../components/BenchmarkCard.astro';
+
+const benchmarks = await getCollection('benchmarks');
+---
+
+<BaseLayout title="Benchmarks" currentPath={Astro.url.pathname}>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Benchmarks</h1>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+        Resultados de pruebas estandarizadas para comparar el rendimiento de diferentes modelos.
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {benchmarks.map((benchmark) => (
+        <BenchmarkCard
+          id={benchmark.data.id}
+          nombre={benchmark.data.nombre}
+          descripcion={benchmark.data.descripcion}
+          fuente={benchmark.data.fuente}
+          resultados={benchmark.data.resultados}
+        />
+      ))}
+    </div>
+  </div>
+</BaseLayout>

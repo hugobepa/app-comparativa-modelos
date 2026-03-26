@@ -1,0 +1,68 @@
+{
+  "id": "zen-ai",
+  "nombre": "Zen AI",
+  "tipo": "standalone",
+  "descripcion": "Plataforma de IA con enfoque en simplicidad y productividad. Ofrece acceso a modelos premium con interfaz intuitiva.",
+  "planes": [
+    {
+      "id": "zen-free",
+      "nombre": "Free",
+      "precioMensual": 0,
+      "tipo": "free",
+      "caracteristicas": [
+        "50 mensajes/día",
+        "Modelos básicos",
+        "Historial limitado"
+      ],
+      "limites": {
+        "peticionesDia": 50,
+        "modelosDisponibles": 3
+      }
+    },
+    {
+      "id": "zen-pro",
+      "nombre": "Pro",
+      "precioMensual": 15,
+      "tipo": "pro",
+      "caracteristicas": [
+        "Mensajes ilimitados",
+        "Todos los modelos",
+        "Historial ilimitado",
+        "Exportar conversaciones",
+        "API access"
+      ],
+      "limites": {
+        "modelosDisponibles": 15
+      }
+    },
+    {
+      "id": "zen-team",
+      "nombre": "Team",
+      "precioMensual": 29,
+      "tipo": "business",
+      "caracteristicas": [
+        "Todo de Pro",
+        "Colaboración en equipo",
+        "Plantillas compartidas",
+        "Admin dashboard",
+        "SSO"
+      ],
+      "limites": {
+        "modelosDisponibles": 15
+      }
+    }
+  ],
+  "modelos": [
+    "claude-4-opus",
+    "claude-4-sonnet",
+    "gpt-4.1",
+    "gpt-4.1-mini",
+    "o3-mini",
+    "gemini-2.5-pro",
+    "gemini-2.5-flash",
+    "deepseek-v3",
+    "qwen-2.5-coder-32b",
+    "llama-4-maverick"
+  ],
+  "url": "https://zen.ai"
+}

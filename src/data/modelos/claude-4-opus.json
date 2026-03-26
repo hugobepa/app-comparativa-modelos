@@ -1,0 +1,26 @@
+{
+  "id": "claude-4-opus",
+  "nombre": "Claude 4 Opus",
+  "proveedor": "anthropic",
+  "categoria": "flagship",
+  "precio": {
+    "input": 15,
+    "output": 75,
+    "moneda": "USD"
+  },
+  "contexto": 200000,
+  "benchmarks": {
+    "sweBenchVerified": 72.5,
+    "humaneval": 92.0,
+    "mmlu": 88.7,
+    "gpqa": 78.3
+  },
+  "caracteristicas": [
+    "vision",
+    "function-calling",
+    "streaming",
+    "system-prompt"
+  ],
+  "disponibleEn": ["github-copilot", "openrouter", "zen-ai"],
+  "lanzamiento": "2025-05-22"
+}

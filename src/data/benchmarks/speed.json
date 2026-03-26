@@ -1,0 +1,28 @@
+{
+  "id": "speed",
+  "nombre": "Speed Benchmark",
+  "descripcion": "Velocidad de respuesta en tokens/segundo",
+  "fuente": "Internal testing",
+  "resultados": [
+    {
+      "modeloId": "gemini-2.5-flash",
+      "puntuacion": 150,
+      "fecha": "2025-01-15"
+    },
+    { "modeloId": "gpt-4.1-mini", "puntuacion": 120, "fecha": "2025-01-15" },
+    { "modeloId": "grok-2", "puntuacion": 110, "fecha": "2025-01-15" },
+    { "modeloId": "deepseek-v3", "puntuacion": 95, "fecha": "2025-01-15" },
+    { "modeloId": "llama-4-maverick", "puntuacion": 90, "fecha": "2025-01-15" },
+    {
+      "modeloId": "qwen-2.5-coder-32b",
+      "puntuacion": 85,
+      "fecha": "2025-01-15"
+    },
+    { "modeloId": "gemini-2.5-pro", "puntuacion": 75, "fecha": "2025-01-15" },
+    { "modeloId": "claude-4-sonnet", "puntuacion": 70, "fecha": "2025-01-15" },
+    { "modeloId": "gpt-4.1", "puntuacion": 65, "fecha": "2025-01-15" },
+    { "modeloId": "o3-mini", "puntuacion": 55, "fecha": "2025-01-15" },
+    { "modeloId": "claude-4-opus", "puntuacion": 45, "fecha": "2025-01-15" },
+    { "modeloId": "o3", "puntuacion": 35, "fecha": "2025-01-15" }
+  ]
+}

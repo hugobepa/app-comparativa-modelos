@@ -1,0 +1,12 @@
+{
+  "id": "rec-4",
+  "perfil": "casual",
+  "titulo": "Mejor para uso casual",
+  "descripcion": "Gratis o muy económico para uso esporádico",
+  "recomendado": "gemini-2.5-flash",
+  "razon": "Gratis o muy económico para uso esporádico",
+  "alternativas": ["gpt-4.1-mini", "deepseek-v3"],
+  "ahorroEstimado": 100,
+  "prioridad": 1,
+  "escenarios": ["casual-dev"]
+}

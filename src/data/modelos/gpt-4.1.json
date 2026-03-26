@@ -1,0 +1,26 @@
+{
+  "id": "gpt-4.1",
+  "nombre": "GPT-4.1",
+  "proveedor": "openai",
+  "categoria": "flagship",
+  "precio": {
+    "input": 2,
+    "output": 8,
+    "moneda": "USD"
+  },
+  "contexto": 1047576,
+  "benchmarks": {
+    "sweBenchVerified": 54.6,
+    "humaneval": 91.8,
+    "mmlu": 86.2,
+    "gpqa": 72.1
+  },
+  "caracteristicas": [
+    "vision",
+    "function-calling",
+    "streaming",
+    "system-prompt"
+  ],
+  "disponibleEn": ["github-copilot", "openrouter", "zen-ai"],
+  "lanzamiento": "2025-04-14"
+}

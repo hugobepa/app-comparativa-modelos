@@ -1,0 +1,88 @@
+---
+import { withBase } from '@utils';
+
+export interface Plan {
+  id: string;
+  nombre: string;
+  precioMensual: number;
+  precioAnual?: number;
+  tipo: string;
+  caracteristicas: string[];
+  limites?: {
+    peticionesDia?: number;
+    modelosDisponibles?: number;
+  };
+}
+
+export interface Props {
+  id: string;
+  nombre: string;
+  url: string;
+  descripcion: string;
+  modelos: string[];
+  planes?: Plan[];
+}
+
+const { 
+  id, 
+  nombre, 
+  url, 
+  descripcion, 
+  modelos,
+  planes
+} = Astro.props;
+
+function getHostname(url: string): string {
+  try {
+    return new URL(url).hostname.replace('www.', '');
+  } catch {
+    return url;
+  }
+}
+
+function formatPrice(price: number): string {
+  if (price === 0) return 'Gratis';
+  return `$${price}`;
+}
+---
+
+<a href={withBase(`/plataformas/${id}/`)} class="block bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-gray-100">
+  <div class="p-6">
+    <div class="flex items-center gap-4 mb-4">
+      <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center">
+        <span class="text-white font-bold text-lg">{nombre.charAt(0)}</span>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold text-gray-900">{nombre}</h3>
+        <span class="text-sm text-indigo-600">
+          {getHostname(url)} ↗
+        </span>
+      </div>
+    </div>
+    
+    <p class="text-gray-600 text-sm mb-4">{descripcion}</p>
+    
+    <div class="flex items-center gap-4 mb-4">
+      <div class="flex items-center gap-2">
+        <span class="text-2xl font-bold text-gray-900">{modelos?.length || 0}</span>
+        <span class="text-sm text-gray-500">modelos</span>
+      </div>
+      
+      {planes && planes.length > 0 && (
+        <div class="flex gap-2">
+          {planes.some(p => p.precioMensual === 0) && (
+            <span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded">
+              Plan gratis
+            </span>
+          )}
+        </div>
+      )}
+    </div>
+  </div>
+  
+  <div class="border-t border-gray-100 px-6 py-4 bg-gray-50">
+    <span class="text-sm font-medium text-indigo-600">
+      Ver detalles →
+    </span>
+  </div>
+</a>

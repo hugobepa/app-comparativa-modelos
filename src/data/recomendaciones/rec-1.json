@@ -1,0 +1,12 @@
+{
+  "id": "rec-1",
+  "perfil": "profesional",
+  "titulo": "Mejor para código diario",
+  "descripcion": "Excelente balance entre rendimiento y costo para desarrollo diario",
+  "recomendado": "claude-4-sonnet",
+  "razon": "Excelente balance entre rendimiento y costo para desarrollo diario",
+  "alternativas": ["gpt-4.1", "gemini-2.5-pro"],
+  "ahorroEstimado": 40,
+  "prioridad": 1,
+  "escenarios": ["pro-dev"]
+}

@@ -1,0 +1,12 @@
+{
+  "id": "rec-2",
+  "perfil": "profesional",
+  "titulo": "Mejor para análisis complejo",
+  "descripcion": "Máxima capacidad de razonamiento para arquitectura y revisiones",
+  "recomendado": "claude-4-opus",
+  "razon": "Máxima capacidad de razonamiento para arquitectura y revisiones",
+  "alternativas": ["o3", "gemini-2.5-pro"],
+  "ahorroEstimado": 20,
+  "prioridad": 1,
+  "escenarios": ["team-lead"]
+}

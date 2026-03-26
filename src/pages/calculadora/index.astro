@@ -1,0 +1,61 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../components/BaseLayout.astro';
+import CostCalculator from '../../components/CostCalculator.astro';
+
+const modelos = await getCollection('modelos');
+---
+
+<BaseLayout title="Calculadora de Costos" currentPath={Astro.url.pathname}>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Calculadora de Costos</h1>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+        Estima el costo mensual de usar diferentes modelos de lenguaje según tu volumen de uso.
+      </p>
+    </div>
+
+    <CostCalculator modelos={modelos.map(m => ({
+      id: m.data.id,
+      nombre: m.data.nombre,
+      proveedor: m.data.proveedor,
+      precioInput: m.data.precio.input,
+      precioOutput: m.data.precio.output,
+      contextoVentana: m.data.contexto
+    }))} />
+
+    <!-- Info Section -->
+    <div class="mt-12 bg-gray-50 rounded-xl p-6">
+      <h2 class="text-xl font-bold text-gray-900 mb-4">¿Cómo funciona?</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-2">Tokens de entrada</h3>
+          <p class="text-gray-600 text-sm">
+            Los tokens de entrada son el texto que envías al modelo. Incluye prompts, instrucciones, 
+            y cualquier contexto que proporciones.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-2">Tokens de salida</h3>
+          <p class="text-gray-600 text-sm">
+            Los tokens de salida son la respuesta generada por el modelo. El costo suele ser 
+            mayor que el de entrada.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-2">Estimación de tokens</h3>
+          <p class="text-gray-600 text-sm">
+            Como referencia aproximada: 1,000 tokens ≈ 750 palabras en inglés o 500 palabras en español.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-2">Costo mensual</h3>
+          <p class="text-gray-600 text-sm">
+            El cálculo asume un uso constante durante todo el mes. Los costos reales pueden 
+            variar según el proveedor.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

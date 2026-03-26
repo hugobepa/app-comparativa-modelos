@@ -1,0 +1,13 @@
+{
+  "id": "startup-founder",
+  "nombre": "Fundador de Startup",
+  "descripcion": "Necesita maximizar valor con presupuesto limitado",
+  "perfil": "profesional",
+  "usoMensual": {
+    "peticiones": 3000,
+    "tokensInput": 1500000,
+    "tokensOutput": 750000
+  },
+  "prioridades": ["precio", "rendimiento"],
+  "presupuesto": 30
+}

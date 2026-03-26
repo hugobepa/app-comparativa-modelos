@@ -1,0 +1,31 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../components/BaseLayout.astro';
+import PlatformCard from '../../components/PlatformCard.astro';
+
+const plataformas = await getCollection('plataformas');
+---
+
+<BaseLayout title="Plataformas" currentPath={Astro.url.pathname}>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Plataformas de LLMs</h1>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+        Las principales plataformas para acceder a modelos de lenguaje mediante API.
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {plataformas.map((plataforma) => (
+        <PlatformCard
+          id={plataforma.data.id}
+          nombre={plataforma.data.nombre}
+          url={plataforma.data.url}
+          descripcion={plataforma.data.descripcion}
+          modelos={plataforma.data.modelos}
+          planes={plataforma.data.planes}
+        />
+      ))}
+    </div>
+  </div>
+</BaseLayout>

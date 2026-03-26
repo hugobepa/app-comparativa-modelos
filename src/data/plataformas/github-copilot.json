@@ -1,0 +1,100 @@
+{
+  "id": "github-copilot",
+  "nombre": "GitHub Copilot",
+  "tipo": "copilot",
+  "descripcion": "Asistente de código impulsado por IA integrado en tu editor. Ideal para desarrolladores que buscan productividad.",
+  "planes": [
+    {
+      "id": "copilot-free",
+      "nombre": "Copilot Free",
+      "precioMensual": 0,
+      "tipo": "free",
+      "caracteristicas": [
+        "2,000 autocompletados/mes",
+        "50 mensajes chat/mes",
+        "Modelos básicos",
+        "Extensiones VS Code"
+      ],
+      "limites": {
+        "peticionesDia": 50,
+        "modelosDisponibles": 2
+      }
+    },
+    {
+      "id": "copilot-pro",
+      "nombre": "Copilot Pro",
+      "precioMensual": 10,
+      "precioAnual": 100,
+      "tipo": "pro",
+      "caracteristicas": [
+        "Autocompletados ilimitados",
+        "Mensajes chat ilimitados",
+        "Acceso a Claude 3.5 Sonnet",
+        "Acceso a GPT-4o",
+        "Copilot en móvil",
+        "Prioridad en horas punta"
+      ],
+      "limites": {
+        "modelosDisponibles": 5
+      }
+    },
+    {
+      "id": "copilot-pro-plus",
+      "nombre": "Copilot Pro+",
+      "precioMensual": 39,
+      "tipo": "pro-plus",
+      "caracteristicas": [
+        "Todo de Pro",
+        "Acceso a Claude Opus 4",
+        "Acceso a GPT-4.1",
+        "Acceso a o3-mini",
+        "Mayor límite de rate",
+        "Soporte prioritario"
+      ],
+      "limites": {
+        "modelosDisponibles": 8
+      }
+    },
+    {
+      "id": "copilot-business",
+      "nombre": "Copilot Business",
+      "precioMensual": 19,
+      "tipo": "business",
+      "caracteristicas": [
+        "Todo de Pro",
+        "Gestión de equipo",
+        "Políticas de organización",
+        "IP indemnity",
+        "Privacidad de código"
+      ],
+      "limites": {
+        "modelosDisponibles": 5
+      }
+    },
+    {
+      "id": "copilot-enterprise",
+      "nombre": "Copilot Enterprise",
+      "precioMensual": 39,
+      "tipo": "enterprise",
+      "caracteristicas": [
+        "Todo de Business",
+        "Fine-tuning personalizado",
+        "Base de conocimiento privada",
+        "Integración GitHub Enterprise",
+        "SLA garantizado"
+      ],
+      "limites": {
+        "modelosDisponibles": 10
+      }
+    }
+  ],
+  "modelos": [
+    "claude-4-opus",
+    "claude-4-sonnet",
+    "gpt-4.1",
+    "gpt-4.1-mini",
+    "o3",
+    "o3-mini"
+  ],
+  "url": "https://github.com/features/copilot"
+}

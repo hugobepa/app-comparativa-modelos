@@ -1,0 +1,48 @@
+---
+import Navigation from '@components/shared/Navigation.astro';
+import ScrollToTop from '@components/shared/ScrollToTop.astro';
+import Sidebar from '@components/shared/Sidebar.astro';
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  activeSection?: string;
+}
+
+const { title, description, activeSection } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="flex min-h-screen">
+    <!-- Sidebar for desktop -->
+    <aside class="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
+      <Sidebar activeSection={activeSection} />
+    </aside>
+    
+    <!-- Main content area -->
+    <div class="flex flex-1 flex-col lg:pl-64">
+      <!-- Top navigation -->
+      <Navigation />
+      
+      <!-- Main content -->
+      <main class="flex-1 py-6">
+        <div class="container-app">
+          <slot />
+        </div>
+      </main>
+      
+      <!-- Footer -->
+      <footer class="border-t border-slate-200 bg-white py-6 dark:border-slate-700 dark:bg-slate-800">
+        <div class="container-app text-center text-sm text-slate-500 dark:text-slate-400">
+          <p>© 2026 LLM Compare. Datos actualizados en marzo 2026.</p>
+          <p class="mt-1">
+            Comparativa de modelos LLM para desarrollo de software.
+          </p>
+        </div>
+      </footer>
+    </div>
+  </div>
+  
+  <ScrollToTop />
+</BaseLayout>

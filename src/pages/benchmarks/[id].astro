@@ -1,0 +1,99 @@
+---
+import { withBase } from '@utils';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../components/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const benchmarks = await getCollection('benchmarks');
+  return benchmarks.map((benchmark) => ({
+    params: { id: benchmark.data.id },
+    props: { benchmark },
+  }));
+}
+
+const { benchmark } = Astro.props;
+
+// Derive category from id
+const categoria = benchmark.data.id;
+
+const categoriaLabels: Record<string, string> = {
+  'coding': 'Programación',
+  'reasoning': 'Razonamiento',
+  'context': 'Contexto',
+  'speed': 'Velocidad'
+};
+
+// Sort results by score descending
+const sortedResults = [...benchmark.data.resultados].sort((a, b) => b.puntuacion - a.puntuacion);
+
+// Get max score for bar calculation
+const maxScore = Math.max(...benchmark.data.resultados.map(r => r.puntuacion));
+
+// Get model names
+const modelos = await getCollection('modelos');
+const modeloMap = new Map(modelos.map(m => [m.data.id, m.data.nombre]));
+---
+
+<BaseLayout title={benchmark.data.nombre} currentPath={Astro.url.pathname}>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Header -->
+    <div class="mb-8">
+      <a href={withBase('/benchmarks/')} class="text-blue-600 hover:text-blue-800 mb-4 inline-block">
+        ← Volver a Benchmarks
+      </a>
+      <div class="mb-4">
+        <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm font-medium capitalize">
+          {categoriaLabels[categoria] || categoria}
+        </span>
+      </div>
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">{benchmark.data.nombre}</h1>
+      <p class="text-xl text-gray-600">{benchmark.data.descripcion}</p>
+    </div>
+
+    <!-- Results -->
+    <div class="bg-white rounded-xl shadow-lg p-6 mb-12">
+      <h2 class="text-xl font-bold text-gray-900 mb-6">Resultados</h2>
+      <div class="space-y-4">
+        {sortedResults.map((resultado, index) => {
+          const percentage = (resultado.puntuacion / maxScore) * 100;
+          const modelName = modeloMap.get(resultado.modeloId) || resultado.modeloId;
+          
+          return (
+            <div class="flex items-center gap-4">
+              <div class="w-8 text-center font-bold text-gray-500">
+                #{index + 1}
+              </div>
+              <div class="flex-1">
+                <div class="flex justify-between mb-1">
+                  <a 
+                    href={withBase(`/modelos/${resultado.modeloId}/`)}
+                    class="font-medium text-gray-900 hover:text-blue-600"
+                  >
+                    {modelName}
+                  </a>
+                  <span class="font-semibold text-gray-900">{resultado.puntuacion.toFixed(1)}</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-3">
+                  <div 
+                    class="bg-gradient-to-r from-blue-500 to-purple-500 h-3 rounded-full transition-all duration-500"
+                    style={`width: ${percentage}%`}
+                  />
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+
+    <!-- Legend -->
+    <div class="bg-gray-50 rounded-xl p-6">
+      <h3 class="font-bold text-gray-900 mb-2">Sobre este benchmark</h3>
+      <p class="text-gray-600 text-sm">
+        Las puntuaciones están normalizadas y representan el rendimiento relativo de cada modelo 
+        en la categoría de <span class="font-medium capitalize">{categoriaLabels[categoria] || categoria}</span>.
+        Una puntuación más alta indica un mejor rendimiento.
+      </p>
+    </div>
+  </div>
+</BaseLayout>

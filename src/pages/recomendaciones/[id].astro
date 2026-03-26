@@ -1,0 +1,137 @@
+---
+import { withBase } from '@utils';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../components/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const recomendaciones = await getCollection('recomendaciones');
+  return recomendaciones.map((rec) => ({
+    params: { id: rec.data.id },
+    props: { recomendacion: rec },
+  }));
+}
+
+const { recomendacion } = Astro.props;
+
+// Get recommended model details
+const modelos = await getCollection('modelos');
+const modeloRecomendado = modelos.find(m => m.data.id === recomendacion.data.recomendado);
+
+// Get alternative models
+const alternativas = recomendacion.data.alternativas
+  .map(altId => modelos.find(m => m.data.id === altId))
+  .filter(Boolean);
+
+// Get scenarios
+const escenarios = await getCollection('escenarios');
+const escenariosRec = recomendacion.data.escenarios
+  .map(escId => escenarios.find(e => e.data.id === escId))
+  .filter(Boolean);
+
+// Format price
+function formatPrice(price: number): string {
+  if (price === 0) return 'Gratis';
+  return `$${price.toFixed(4)}`;
+}
+
+const perfilLabels: Record<string, string> = {
+  'desarrollador-individual': 'Desarrollador Individual',
+  'startup': 'Startup',
+  'empresa': 'Empresa',
+  'estudiante': 'Estudiante',
+  'investigador': 'Investigador'
+};
+---
+
+<BaseLayout title={recomendacion.data.titulo} currentPath={Astro.url.pathname}>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Header -->
+    <div class="mb-8">
+      <a href={withBase('/recomendaciones/')} class="text-blue-600 hover:text-blue-800 mb-4 inline-block">
+        ← Volver a Recomendaciones
+      </a>
+      <div class="mb-4">
+        <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">
+          {perfilLabels[recomendacion.data.perfil] || recomendacion.data.perfil}
+        </span>
+      </div>
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">{recomendacion.data.titulo}</h1>
+      <p class="text-xl text-gray-600">{recomendacion.data.descripcion}</p>
+    </div>
+
+    <!-- Recommended Model -->
+    {modeloRecomendado && (
+      <div class="bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl p-6 mb-8 text-white">
+        <div class="flex items-center gap-2 mb-4">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+          </svg>
+          <span class="font-bold text-lg">Modelo Recomendado</span>
+        </div>
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-2xl font-bold mb-1">{modeloRecomendado.data.nombre}</h2>
+            <p class="opacity-90">{modeloRecomendado.data.proveedor}</p>
+          </div>
+          <a 
+            href={withBase(`/modelos/${modeloRecomendado.data.id}/`)}
+            class="px-4 py-2 bg-white text-green-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors"
+          >
+            Ver Detalles
+          </a>
+        </div>
+        <p class="mt-4 opacity-90">{recomendacion.data.razon}</p>
+      </div>
+    )}
+
+    <!-- Alternatives -->
+    {alternativas.length > 0 && (
+      <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+        <h2 class="text-xl font-bold text-gray-900 mb-4">Alternativas</h2>
+        <div class="space-y-4">
+          {alternativas.map((alt, index) => alt && (
+            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+              <div>
+                <h3 class="font-semibold text-gray-900">{alt.data.nombre}</h3>
+                <p class="text-sm text-gray-600">{alt.data.proveedor} • {formatPrice(alt.data.precio.input)}/1M tokens</p>
+              </div>
+              <a 
+                href={withBase(`/modelos/${alt.data.id}/`)}
+                class="text-blue-600 hover:text-blue-800 font-medium"
+              >
+                Ver →
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- Use Cases -->
+    {escenariosRec.length > 0 && (
+      <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+        <h2 class="text-xl font-bold text-gray-900 mb-4">Casos de Uso</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {escenariosRec.map((escenario) => escenario && (
+            <div class="p-4 border border-gray-200 rounded-lg">
+              <h3 class="font-semibold text-gray-900 mb-2">{escenario.data.nombre}</h3>
+              <p class="text-sm text-gray-600">{escenario.data.descripcion}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- CTA -->
+    <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-8 text-center text-white">
+      <h2 class="text-2xl font-bold mb-4">¿Listo para empezar?</h2>
+      <p class="mb-6 opacity-90">Calcula el costo estimado para tu caso de uso específico.</p>
+      <a 
+        href={withBase('/calculadora/')} 
+        class="inline-block px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors"
+      >
+        Usar Calculadora
+      </a>
+    </div>
+  </div>
+</BaseLayout>

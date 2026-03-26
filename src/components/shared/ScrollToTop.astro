@@ -1,0 +1,37 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<button
+  id="scroll-to-top"
+  class={`fixed bottom-24 right-4 z-50 hidden rounded-full bg-primary-600 p-3 text-white shadow-lg transition-all hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:bg-primary-500 dark:hover:bg-primary-600 sm:bottom-28 md:bottom-8 ${className}`}
+  aria-label="Volver arriba"
+>
+  <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+  </svg>
+</button>
+
+<script>
+  const scrollBtn = document.getElementById('scroll-to-top');
+  
+  function toggleScrollButton() {
+    if (window.scrollY > 300) {
+      scrollBtn?.classList.remove('hidden');
+    } else {
+      scrollBtn?.classList.add('hidden');
+    }
+  }
+
+  toggleScrollButton();
+  
+  window.addEventListener('scroll', toggleScrollButton);
+  
+  scrollBtn?.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>

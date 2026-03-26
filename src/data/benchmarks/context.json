@@ -1,0 +1,48 @@
+{
+  "id": "context",
+  "nombre": "Context Window",
+  "descripcion": "Tamaño de ventana de contexto en tokens",
+  "fuente": "Official specs",
+  "resultados": [
+    {
+      "modeloId": "gemini-2.5-pro",
+      "puntuacion": 1048576,
+      "fecha": "2025-01-15"
+    },
+    {
+      "modeloId": "gemini-2.5-flash",
+      "puntuacion": 1048576,
+      "fecha": "2025-01-15"
+    },
+    { "modeloId": "gpt-4.1", "puntuacion": 1047576, "fecha": "2025-01-15" },
+    {
+      "modeloId": "gpt-4.1-mini",
+      "puntuacion": 1047576,
+      "fecha": "2025-01-15"
+    },
+    {
+      "modeloId": "claude-4-opus",
+      "puntuacion": 200000,
+      "fecha": "2025-01-15"
+    },
+    {
+      "modeloId": "claude-4-sonnet",
+      "puntuacion": 200000,
+      "fecha": "2025-01-15"
+    },
+    { "modeloId": "o3", "puntuacion": 200000, "fecha": "2025-01-15" },
+    { "modeloId": "o3-mini", "puntuacion": 200000, "fecha": "2025-01-15" },
+    { "modeloId": "deepseek-v3", "puntuacion": 128000, "fecha": "2025-01-15" },
+    {
+      "modeloId": "qwen-2.5-coder-32b",
+      "puntuacion": 128000,
+      "fecha": "2025-01-15"
+    },
+    { "modeloId": "grok-2", "puntuacion": 128000, "fecha": "2025-01-15" },
+    {
+      "modeloId": "llama-4-maverick",
+      "puntuacion": 128000,
+      "fecha": "2025-01-15"
+    }
+  ]
+}

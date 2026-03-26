@@ -1,0 +1,94 @@
+---
+import { withBase } from '@utils';
+
+export interface Props {
+  id: string;
+  titulo: string;
+  perfil: string;
+  descripcion: string;
+  recomendado: string;
+  alternativas: string[];
+  escenarios: string[];
+}
+
+const { 
+  id, 
+  titulo, 
+  perfil, 
+  descripcion, 
+  recomendado, 
+  alternativas,
+  escenarios 
+} = Astro.props;
+
+const perfilColors: Record<string, string> = {
+  'desarrollador-individual': 'bg-blue-100 text-blue-800',
+  'startup': 'bg-green-100 text-green-800',
+  'empresa': 'bg-purple-100 text-purple-800',
+  'estudiante': 'bg-yellow-100 text-yellow-800',
+  'investigador': 'bg-pink-100 text-pink-800'
+};
+
+const perfilLabels: Record<string, string> = {
+  'desarrollador-individual': 'Desarrollador Individual',
+  'startup': 'Startup',
+  'empresa': 'Empresa',
+  'estudiante': 'Estudiante',
+  'investigador': 'Investigador'
+};
+---
+
+<article class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-gray-100">
+  <div class="p-6">
+    <div class="flex items-start justify-between mb-4">
+      <h3 class="text-xl font-bold text-gray-900">{titulo}</h3>
+      <span class={`px-3 py-1 rounded-full text-xs font-medium ${perfilColors[perfil] || 'bg-gray-100 text-gray-800'}`}>
+        {perfilLabels[perfil] || perfil}
+      </span>
+    </div>
+    
+    <p class="text-gray-600 text-sm mb-4">{descripcion}</p>
+    
+    <div class="space-y-3">
+      <div class="flex items-center gap-2">
+        <span class="text-sm text-gray-500">Recomendado:</span>
+        <span class="px-3 py-1 bg-green-100 text-green-800 text-sm font-medium rounded-full">
+          {recomendado}
+        </span>
+      </div>
+      
+      {alternativas.length > 0 && (
+        <div>
+          <span class="text-sm text-gray-500">Alternativas:</span>
+          <div class="flex flex-wrap gap-2 mt-1">
+            {alternativas.map((alt) => (
+              <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">
+                {alt}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+      
+      {escenarios.length > 0 && (
+        <div>
+          <span class="text-sm text-gray-500">Escenarios:</span>
+          <div class="flex flex-wrap gap-2 mt-1">
+            {escenarios.map((esc) => (
+              <span class="px-2 py-1 bg-indigo-50 text-indigo-700 text-xs rounded">
+                {esc}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </div>
+  
+  <a 
+    href={withBase(`/recomendaciones/${id}/`)} 
+    class="block bg-gray-50 px-6 py-3 text-center text-sm font-medium text-indigo-600 hover:bg-indigo-50 transition-colors"
+  >
+    Ver análisis completo →
+  </a>
+</article>

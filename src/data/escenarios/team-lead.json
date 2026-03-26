@@ -1,0 +1,13 @@
+{
+  "id": "team-lead",
+  "nombre": "Tech Lead",
+  "descripcion": "Gestión de código y revisiones, necesita análisis profundo",
+  "perfil": "profesional",
+  "usoMensual": {
+    "peticiones": 1500,
+    "tokensInput": 2000000,
+    "tokensOutput": 800000
+  },
+  "prioridades": ["rendimiento", "contexto"],
+  "presupuesto": 100
+}

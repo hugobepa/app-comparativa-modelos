@@ -1,0 +1,75 @@
+---
+import { withBase } from '@utils';
+
+interface Props {
+  activeSection?: string;
+  class?: string;
+}
+
+const { activeSection = '', class: className = '' } = Astro.props;
+
+const navItems = [
+  { id: 'modelos', href: withBase('/modelos/'), label: 'Modelos', icon: 'cube' },
+  { id: 'benchmarks', href: withBase('/benchmarks/'), label: 'Benchmarks', icon: 'chart' },
+  { id: 'plataformas', href: withBase('/plataformas/'), label: 'Plataformas', icon: 'layers' },
+  { id: 'calculadora', href: withBase('/calculadora/'), label: 'Calculadora', icon: 'calculator' },
+];
+---
+
+<aside class={`flex h-full flex-col border-r border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-800 ${className}`}>
+  <!-- Logo -->
+  <div class="flex h-16 items-center border-b border-slate-200 px-6 dark:border-slate-700">
+    <a href={withBase('/')} class="flex items-center gap-2">
+      <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-600 text-white">
+        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+        </svg>
+      </div>
+      <span class="text-lg font-semibold text-slate-900 dark:text-white">LLM Compare</span>
+    </a>
+  </div>
+  
+  <!-- Navigation -->
+  <nav class="flex-1 space-y-1 px-3 py-4">
+    {navItems.map((item) => (
+      <a
+        href={item.href}
+        class={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+          activeSection === item.id
+            ? 'bg-primary-50 text-primary-700 dark:bg-primary-900/30 dark:text-primary-300'
+            : 'text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-700'
+        }`}
+      >
+        {item.icon === 'chart' && (
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+          </svg>
+        )}
+        {item.icon === 'cube' && (
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+          </svg>
+        )}
+        {item.icon === 'layers' && (
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+          </svg>
+        )}
+        {item.icon === 'calculator' && (
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+          </svg>
+        )}
+        {item.label}
+      </a>
+    ))}
+  </nav>
+  
+  <!-- Footer info -->
+  <div class="border-t border-slate-200 p-4 dark:border-slate-700">
+    <p class="text-xs text-slate-500 dark:text-slate-400">
+      Datos actualizados<br />
+      Marzo 2026
+    </p>
+  </div>
+</aside>

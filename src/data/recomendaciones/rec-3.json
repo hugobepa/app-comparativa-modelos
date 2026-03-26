@@ -1,0 +1,12 @@
+{
+  "id": "rec-3",
+  "perfil": "profesional",
+  "titulo": "Mejor presupuesto limitado",
+  "descripcion": "Máximo valor por dólar, ideal para startups",
+  "recomendado": "deepseek-v3",
+  "razon": "Máximo valor por dólar, ideal para startups",
+  "alternativas": ["gemini-2.5-flash", "gpt-4.1-mini"],
+  "ahorroEstimado": 80,
+  "prioridad": 1,
+  "escenarios": ["startup-founder"]
+}

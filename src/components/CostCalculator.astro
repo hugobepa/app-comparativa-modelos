@@ -1,0 +1,147 @@
+---
+export interface ModelOption {
+  id: string;
+  nombre: string;
+  proveedor: string;
+  precioInput: number;
+  precioOutput: number;
+  contextoVentana: number;
+}
+
+export interface Props {
+  modelos: ModelOption[];
+}
+
+const { modelos } = Astro.props;
+---
+
+<div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+  <h3 class="text-lg font-semibold text-gray-900 mb-6">Calculadora de Costos</h3>
+  
+  <form id="cost-calculator" class="space-y-6">
+    <div>
+      <label for="model-select" class="block text-sm font-medium text-gray-700 mb-2">
+        Selecciona un modelo
+      </label>
+      <select 
+        id="model-select" 
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+      >
+        <option value="">-- Selecciona un modelo --</option>
+        {modelos.map((model) => (
+          <option value={model.id} data-input={model.precioInput} data-output={model.precioOutput}>
+            {model.nombre} ({model.proveedor})
+          </option>
+        ))}
+      </select>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <label for="input-tokens" class="block text-sm font-medium text-gray-700 mb-2">
+          Tokens de entrada
+        </label>
+        <input 
+          type="number" 
+          id="input-tokens" 
+          value="1000000"
+          min="0"
+          step="1000"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+        />
+        <p class="text-xs text-gray-500 mt-1">~750 palabras en español</p>
+      </div>
+      
+      <div>
+        <label for="output-tokens" class="block text-sm font-medium text-gray-700 mb-2">
+          Tokens de salida
+        </label>
+        <input 
+          type="number" 
+          id="output-tokens" 
+          value="500000"
+          min="0"
+          step="1000"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+        />
+        <p class="text-xs text-gray-500 mt-1">~375 palabras en español</p>
+      </div>
+    </div>
+    
+    <div>
+      <label for="requests" class="block text-sm font-medium text-gray-700 mb-2">
+        Número de solicitudes
+      </label>
+      <input 
+        type="number" 
+        id="requests" 
+        value="1"
+        min="1"
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+      />
+    </div>
+    
+    <button 
+      type="submit"
+      class="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-indigo-700 transition-colors"
+    >
+      Calcular costo
+    </button>
+  </form>
+  
+  <div id="result" class="hidden mt-6 p-4 bg-gray-50 rounded-lg">
+    <h4 class="text-sm font-medium text-gray-700 mb-2">Resultado</h4>
+    <div class="space-y-2">
+      <div class="flex justify-between">
+        <span class="text-gray-600">Costo por solicitud:</span>
+        <span id="cost-per-request" class="font-medium text-gray-900">-</span>
+      </div>
+      <div class="flex justify-between">
+        <span class="text-gray-600">Costo total:</span>
+        <span id="total-cost" class="font-bold text-lg text-indigo-600">-</span>
+      </div>
+      <div class="flex justify-between">
+        <span class="text-gray-600">Costo mensual (30 días):</span>
+        <span id="monthly-cost" class="font-medium text-gray-900">-</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function formatPrice(price: number): string {
+    if (price === 0) return 'Gratis';
+    if (price < 0.01) return `$${price.toFixed(6)}`;
+    if (price < 1) return `$${price.toFixed(4)}`;
+    return `$${price.toFixed(2)}`;
+  }
+  
+  const form = document.getElementById('cost-calculator') as HTMLFormElement;
+  const result = document.getElementById('result');
+  const modelSelect = document.getElementById('model-select') as HTMLSelectElement;
+  const inputTokens = document.getElementById('input-tokens') as HTMLInputElement;
+  const outputTokens = document.getElementById('output-tokens') as HTMLInputElement;
+  const requests = document.getElementById('requests') as HTMLInputElement;
+  
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const selectedOption = modelSelect.options[modelSelect.selectedIndex];
+    const precioInput = parseFloat(selectedOption.dataset.input || '0');
+    const precioOutput = parseFloat(selectedOption.dataset.output || '0');
+    
+    const input = parseFloat(inputTokens.value) || 0;
+    const output = parseFloat(outputTokens.value) || 0;
+    const numRequests = parseFloat(requests.value) || 1;
+    
+    const costPerRequest = (precioInput * input / 1000000) + (precioOutput * output / 1000000);
+    const totalCost = costPerRequest * numRequests;
+    const monthlyCost = totalCost * 30;
+    
+    document.getElementById('cost-per-request')!.textContent = formatPrice(costPerRequest);
+    document.getElementById('total-cost')!.textContent = formatPrice(totalCost);
+    document.getElementById('monthly-cost')!.textContent = formatPrice(monthlyCost);
+    
+    result?.classList.remove('hidden');
+  });
+</script>

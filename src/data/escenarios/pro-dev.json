@@ -1,0 +1,13 @@
+{
+  "id": "pro-dev",
+  "nombre": "Desarrollador Profesional",
+  "descripcion": "Uso diario intensivo para desarrollo de software profesional",
+  "perfil": "profesional",
+  "usoMensual": {
+    "peticiones": 2000,
+    "tokensInput": 1000000,
+    "tokensOutput": 500000
+  },
+  "prioridades": ["rendimiento", "precio"],
+  "presupuesto": 50
+}
